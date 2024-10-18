@@ -1,4 +1,4 @@
-<!-- grid-search -->
+<app-grid-search [delay]="configuration.search.inputDelayMs" (valueChanged)="onSearch($event)"/>
 <div style="display: flex; flex-direction: column">
   <div style="display: flex; flex-direction: row">
     @for (col of configuration.columnDefinitions; track col.prop) {

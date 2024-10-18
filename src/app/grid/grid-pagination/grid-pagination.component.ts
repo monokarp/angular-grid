@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-grid-pagination',
   standalone: true,
   imports: [],
   templateUrl: './grid-pagination.component.html',
-  styleUrl: './grid-pagination.component.scss'
+  styleUrl: './grid-pagination.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridPaginationComponent {
 
