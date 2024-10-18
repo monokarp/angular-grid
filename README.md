@@ -1,0 +1,2 @@
+To serve:
+```npm start```
