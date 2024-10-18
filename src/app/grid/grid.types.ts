@@ -1,10 +1,6 @@
-interface Pagination {
+interface PaginationConfig {
   pageSize: number;
 }
-
-// TODO add virtual scroll config
-
-type PaginationConfig = Pagination;
 
 interface SearchConfig {
   inputDelayMs: number;

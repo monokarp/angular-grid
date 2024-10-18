@@ -15,4 +15,4 @@
     }
   </div>
 </div>
-<!-- grid-pagination -->
+<app-grid-pagination [pageSize]="configuration.pagination.pageSize" [totalRows]="configuration.rowData.length" (pageSelected)="onPageSelected($event)" />

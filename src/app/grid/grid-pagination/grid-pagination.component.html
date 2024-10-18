@@ -1,1 +1,12 @@
-<p>grid-pagination works!</p>
+<div class="flex-row wrapper">
+  <div class="label">{{ getPaginationLabel() }}</div>
+  <div class="flex-row">
+    <button class="range-btn first" (click)="first()">First</button>
+    <button class="range-btn previous" (click)="previous()">Previous</button>
+    @for(value of pageButtonsRange(); track value) {
+        <button class="range-btn" [class.selected]="currentPage == value" (click)="setPage(value)">{{ value + 1 }}</button>
+    }
+    <button class="range-btn next" (click)="next()">Next</button>
+    <button class="range-btn last" (click)="last()">Last</button>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+.wrapper {
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.label {
+    align-content: center;
+    padding-right: 2rem;
+}
+
+.range-btn {
+    min-width: 2rem;
+    cursor: pointer;
+
+    background-color: white;
+    border-radius: 0rem;
+    border: solid grey;
+    // TODO move colors and border sizes to global variables
+    border-width: 0.025rem 0.0125rem 0.025rem 0.0125rem;
+    padding: 0.5rem;
+
+    &.first {
+        border-radius: 0.25rem 0 0 0.25rem;
+
+        padding-left: 1.75rem;
+        background: url('../../icons/first_page.svg') no-repeat 0.25rem center;
+    }
+
+    &.previous {
+        padding-left: 1.75rem;
+        background: url('../../icons/arrow_back.svg') no-repeat 0.25rem center;
+    }
+
+    &.next {
+        padding-right: 1.75rem;
+        background: url('../../icons/arrow_forward.svg') no-repeat right 0.25rem center;
+    }
+
+    &.last {
+        border-radius: 0 0.25rem 0.25rem 0;
+
+        padding-right: 1.75rem;
+        background: url('../../icons/last_page.svg') no-repeat right 0.25rem center;
+    }
+
+    &.selected {
+        background-color: lightgrey;
+    }
+}
