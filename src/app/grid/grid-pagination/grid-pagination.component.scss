@@ -15,7 +15,7 @@
 
     background-color: white;
     border-radius: 0rem;
-    border: solid grey;
+    border: solid #D0D5DD;
     // TODO move colors and border sizes to global variables
     border-width: 0.025rem 0.0125rem 0.025rem 0.0125rem;
     padding: 0.5rem;
@@ -23,8 +23,7 @@
     &.first {
         border-radius: 0.25rem 0 0 0.25rem;
 
-        padding-left: 1.75rem;
-        background: url('../../icons/first_page.svg') no-repeat 0.25rem center;
+        background: url('../../icons/first_page.svg') no-repeat center;
     }
 
     &.previous {
@@ -40,8 +39,11 @@
     &.last {
         border-radius: 0 0.25rem 0.25rem 0;
 
-        padding-right: 1.75rem;
-        background: url('../../icons/last_page.svg') no-repeat right 0.25rem center;
+        background: url('../../icons/last_page.svg') no-repeat center;
+    }
+
+    &:hover {
+        background-color: #F2F4F7;
     }
 
     &.selected {

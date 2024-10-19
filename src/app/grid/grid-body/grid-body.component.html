@@ -1,1 +1,20 @@
-<p>grid-body works!</p>
+<div class="flex-row grid-wrapper">
+  @for (col of columnDefinitions; track col.prop; let idx = $index) {
+  <div class="flex-col col-wrapper">
+    <app-header-cell
+      class="header-cell"
+      [class.top-left]="idx == 0"
+      [class.top-right]="idx == columnDefinitions.length - 1"
+      [data]="col"
+    />
+    @for (row of rowData; track row.id; let idx = $index) {
+    <app-data-cell
+      class="data-cell"
+      [class.top-left]="idx == 0"
+      [class.top-right]="idx == columnDefinitions.length - 1"
+      [data]="row[col.prop]"
+    />
+    }
+  </div>
+  }
+</div>

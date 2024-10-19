@@ -1,18 +1,13 @@
-<app-grid-search [delay]="configuration.search.inputDelayMs" (valueChanged)="onSearch($event)"/>
-<div style="display: flex; flex-direction: column">
-  <div style="display: flex; flex-direction: row">
-    @for (col of configuration.columnDefinitions; track col.prop) {
-    <div style="margin: 1px;">{{ col.label }}</div>
-    }
-  </div>
-  <div style="display: flex; flex-direction: column">
-    @for (row of configuration.rowData; track row.id) {
-    <div style="display: flex; flex-direction: row">
-      @for (col of configuration.columnDefinitions; track col.prop) {
-      <div style="margin: 1px;">{{ row[col.prop] }}</div>
-      }
-    </div>
-    }
-  </div>
-</div>
-<app-grid-pagination [pageSize]="configuration.pagination.pageSize" [totalRows]="configuration.rowData.length" (pageSelected)="onPageSelected($event)" />
+<app-grid-search
+  [delay]="configuration.search.inputDelayMs"
+  (valueChanged)="onSearch($event)"
+/>
+<app-grid-body
+  [columnDefinitions]="configuration.columnDefinitions"
+  [rowData]="getCurrentPageRows()"
+/>
+<app-grid-pagination
+  [pageSize]="configuration.pagination.pageSize"
+  [totalRows]="configuration.rowData.length"
+  (pageSelected)="onPageSelected($event)"
+/>

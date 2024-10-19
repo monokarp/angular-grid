@@ -24,7 +24,7 @@ interface DateCol<T> extends BaseColumnDefinition<T> {
   type: 'date';
 }
 
-type ColumnDefinition<T> = IdCol | StrCol<T> | DateCol<T>;
+export type ColumnDefinition<T> = IdCol | StrCol<T> | DateCol<T>;
 
 interface RowDataProvider<T> {
   getPage: (pageNumber: number) => Promise<T[]>;
@@ -33,7 +33,7 @@ interface RowDataProvider<T> {
 
 type StaticRowData<T> = T[];
 
-type RowData<T> = StaticRowData<T>; // | RowDataProvider<T>;
+export type RowData<T> = StaticRowData<T>; // | RowDataProvider<T>;
 
 export interface RowType {
   id: string;
