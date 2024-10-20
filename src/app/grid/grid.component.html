@@ -1,13 +1,16 @@
 <app-grid-search
   [delay]="configuration.search.inputDelayMs"
-  (valueChanged)="search$.next($event)"
+  (valueChanged)="searchChange$.next($event)"
 />
-<app-grid-body
-  [columnDefinitions]="configuration.columnDefinitions"
-  [rowData]="(rowData$ | async)!"
-/>
+<app-loading-overlay [enabled]="(fetchingData$ | async)!">
+  <app-grid-body
+    [columnDefinitions]="configuration.columnDefinitions"
+    [rowData]="(paginatedData$ | async)?.rows ?? []"
+/></app-loading-overlay>
 <app-grid-pagination
-  [pageSize]="configuration.pagination.pageSize"
-  [totalRows]="(totalRows$ | async)!"
-  (pageSelected)="page$.next($event)"
+  [pageSize]="pageSize"
+  [currentPage]="(currentPage$ | async)!"
+  [totalRows]="(paginatedData$ | async)?.totalRowCount ?? 0"
+  [disableActions]="(fetchingData$ | async)!"
+  (pageSelected)="pageChange$.next($event)"
 />

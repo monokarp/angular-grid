@@ -1,6 +1,8 @@
 To run:
-
-```npm start```
+```
+npm i
+npm start
+```
 
 ## Assumptions and considerations:
 ### Global:
@@ -8,6 +10,7 @@ To run:
 - I'll take a shortcut and inline most SVGs as background images, since centralized styling was not mentioned as a requirement. A proper way would be to add svg components to enable interaction and styling.
 - The spec says `Table rows and columns should adapt to the input data provided in the
 mock response.` but I will assume that column definitions are declared before the table is initialized, because there must be some kind of explicit contract in order to support template cells and action columns.
+- Skipping data fetch error handling for simplicity as it would entail adding user notification UI.
 ### Search:
 - Assuming there's no suggest/autocomplete for the search bar, since not mentioned in the spec.
 - I'm hardcoding 'name' as search property for simplicity, on a real project it would be likely connected to UI (selecting from one of value grid columns)

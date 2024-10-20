@@ -5,22 +5,25 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
 
 @Component({
   selector: 'app-grid-pagination',
   standalone: true,
-  imports: [],
+  imports: [LoadingOverlayComponent],
   templateUrl: './grid-pagination.component.html',
   styleUrl: './grid-pagination.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridPaginationComponent {
   @Input() public pageSize!: number;
+  @Input() public currentPage!: number;
   @Input() public totalRows!: number;
+
+  @Input() public disableActions = false;
 
   @Output() public pageSelected = new EventEmitter<number>();
 
-  public currentPage = 0;
   private readonly pageButtonSpread = 2;
 
   public getPaginationLabel() {
@@ -68,7 +71,6 @@ export class GridPaginationComponent {
   }
 
   public setPage(value: number) {
-    this.currentPage = value;
     this.pageSelected.emit(value);
   }
 

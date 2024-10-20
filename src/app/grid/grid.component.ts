@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,22 +6,23 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { GridConfiguration, RowType } from './grid.types';
-import { GridPaginationComponent } from './grid-pagination/grid-pagination.component';
-import { GridBodyComponent } from './grid-body/grid-body.component';
 import {
-  Subject,
   BehaviorSubject,
+  map,
   merge,
-  startWith,
-  switchMap,
-  withLatestFrom,
   mergeAll,
   share,
-  map,
+  startWith,
+  Subject,
+  switchMap,
+  tap,
+  withLatestFrom,
 } from 'rxjs';
+import { GridBodyComponent } from './grid-body/grid-body.component';
+import { GridPaginationComponent } from './grid-pagination/grid-pagination.component';
 import { GridSearchComponent } from './grid-search/grid-search.component';
-import { CommonModule } from '@angular/common';
+import { GridConfiguration, RowType } from './grid.types';
+import { LoadingOverlayComponent } from './loading-overlay/loading-overlay.component';
 
 @Component({
   selector: 'app-grid',
@@ -30,6 +32,7 @@ import { CommonModule } from '@angular/common';
     GridBodyComponent,
     GridSearchComponent,
     CommonModule,
+    LoadingOverlayComponent,
   ],
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.scss',
@@ -40,35 +43,46 @@ export class GridComponent<T extends RowType> {
 
   @Output() public pageSelected = new EventEmitter<number>();
 
-  public readonly page$ = new Subject<number>();
-  public readonly search$ = new BehaviorSubject<string>('');
+  public get pageSize() {
+    return this.configuration.pagination.pageSize;
+  }
 
-  private readonly paginatedData$ = merge([
-    this.search$.pipe(
-      startWith(''),
-      switchMap((value) => {
-        const { pageSize } = this.configuration.pagination;
+  public readonly pageChange$ = new Subject<number>();
+  public readonly searchChange$ = new BehaviorSubject('');
+  public readonly fetchingData$ = new BehaviorSubject(false);
 
-        return this.configuration.dataProvider.getData(value, pageSize, 0);
-      })
+  public readonly searchResult$ = this.searchChange$.pipe(
+    tap(() => this.fetchingData$.next(true)),
+    switchMap((value) =>
+      this.configuration.dataProvider.getData(value, this.pageSize, 0)
+    )
+  );
+
+  public readonly paginationResult$ = this.pageChange$.pipe(
+    withLatestFrom(this.searchChange$),
+    tap(() => this.fetchingData$.next(true)),
+    switchMap(([page, search]) =>
+      this.configuration.dataProvider.getData(
+        search,
+        this.pageSize,
+        this.pageSize * page
+      )
     ),
-    this.page$.pipe(
-      withLatestFrom(this.search$),
-      switchMap(([page, search]) => {
-        const { pageSize } = this.configuration.pagination;
+    share()
+  );
 
-        return this.configuration.dataProvider.getData(
-          search,
-          pageSize,
-          pageSize * page
-        );
-      })
-      // TODO if this doesnt throw, then I update the page
-    ),
-  ]).pipe(mergeAll(), share());
+  public readonly currentPage$ = this.paginationResult$.pipe(
+    withLatestFrom(this.pageChange$),
+    map(([_, page]) => page),
+    startWith(0)
+  );
 
-  public readonly rowData$ = this.paginatedData$.pipe(map((data) => data.rows));
-  public readonly totalRows$ = this.paginatedData$.pipe(
-    map((data) => data.totalRowCount)
+  public readonly paginatedData$ = merge([
+    this.searchResult$,
+    this.paginationResult$,
+  ]).pipe(
+    mergeAll(),
+    tap(() => this.fetchingData$.next(false)),
+    share()
   );
 }
