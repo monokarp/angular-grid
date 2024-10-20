@@ -16,6 +16,7 @@ mock response.` but I will assume that column definitions are declared before th
 - Assuming there's no suggest/autocomplete for the search bar, since not mentioned in the spec.
 - I'm hardcoding 'name' as search property for simplicity, on a real project it would be likely connected to UI (selecting from one of value grid columns)
 - A major decision here is whether the grid should do its own filtering. Based on my experience, it usually shouldn't - but in this case I felt like making more of a self-contained component, so that all data-related state handling stays internal.
+- After search the selected page is reset to 0 as I don't see an objectively correct solution here, still on a real project I'd be more elaborate.
 ### Pagination:
 - Current design is unclear to me - how is the '...' page button expected to behave? Does it expand inline or display a dropdown with more page buttons, or does the range shift? Since I'm unable to ask questions, I'll change it to the following: (first) (previous) (5 nearest page number buttons) (next) (last). I'll also use material font SVGs for the new buttons.
 - Explicit navigation to a page would be nice to have but not specified.

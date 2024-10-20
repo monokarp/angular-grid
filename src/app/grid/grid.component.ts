@@ -55,7 +55,8 @@ export class GridComponent<T extends RowType> {
     tap(() => this.fetchingData$.next(true)),
     switchMap((value) =>
       this.configuration.dataProvider.getData(value, this.pageSize, 0)
-    )
+    ),
+    share()
   );
 
   public readonly paginationResult$ = this.pageChange$.pipe(
@@ -71,11 +72,16 @@ export class GridComponent<T extends RowType> {
     share()
   );
 
-  public readonly currentPage$ = this.paginationResult$.pipe(
+  public readonly updatedPage$ = this.paginationResult$.pipe(
     withLatestFrom(this.pageChange$),
-    map(([_, page]) => page),
-    startWith(0)
+    map(([_, page]) => page)
   );
+  public readonly resetPageOnSearch$ = this.searchResult$.pipe(map(() => 0));
+
+  public readonly currentPage$ = merge([
+    this.updatedPage$,
+    this.resetPageOnSearch$,
+  ]).pipe(mergeAll(), startWith(0));
 
   public readonly paginatedData$ = merge([
     this.searchResult$,
