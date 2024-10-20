@@ -29,10 +29,25 @@ export class AppComponent {
         { prop: 'id', label: 'ID' },
         { prop: 'name', label: 'Name', type: 'string' },
         { prop: 'email', label: 'E-mail', type: 'string' },
-        { prop: 'registered', label: 'Date registered', type: 'date' },
-        // TODO Need to also pass date format here
-        { prop: 'lastLogin', label: 'Last login', type: 'date' },
-        // TODO Add actions
+        {
+          prop: 'registered',
+          label: 'Date registered',
+          type: 'date',
+          format: {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          },
+        },
+        {
+          prop: 'lastLogin',
+          label: 'Last login',
+          type: 'date',
+          format: {
+            dateStyle: 'short',
+            timeStyle: 'short',
+          },
+        },
       ],
       dataProvider: {
         getData: (searchValue: string, top: number, skip: number) =>

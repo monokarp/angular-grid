@@ -8,12 +8,13 @@
       [data]="col"
     />
     @for (row of rowData; track row.id; let idx = $index) {
-    <app-data-cell
-      class="data-cell"
-      [class.top-left]="idx == 0"
-      [class.top-right]="idx == columnDefinitions.length - 1"
-      [data]="row[col.prop]"
-    />
+      <app-data-cell
+        class="data-cell"
+        [class.top-left]="idx == 0"
+        [class.top-right]="idx == columnDefinitions.length - 1"
+        [definition]="col"
+        [value]="row[col.prop]"
+      />
     }
   </div>
   }
