@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -8,21 +7,17 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { debounceTime, fromEvent, map, takeUntil } from 'rxjs';
-import { BaseComponent } from '../../base.component';
+import { debounceTime, fromEvent, map } from 'rxjs';
+import { BaseComponent } from '../base.component';
 
 @Component({
-  selector: 'app-grid-search',
+  selector: 'app-search-bar',
   standalone: true,
   imports: [],
-  templateUrl: './grid-search.component.html',
-  styleUrl: './grid-search.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './search-bar.component.html',
+  styleUrl: './search-bar.component.scss',
 })
-export class GridSearchComponent
-  extends BaseComponent
-  implements AfterViewInit
-{
+export class SearchBarComponent extends BaseComponent implements AfterViewInit {
   @Input() public delay!: number;
 
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef;
@@ -33,7 +28,7 @@ export class GridSearchComponent
       .pipe(
         debounceTime(this.delay),
         map((event: InputEvent) => (event.target as HTMLInputElement).value),
-        this.takeUntilDispose(),
+        this.takeUntilDispose()
       )
       .subscribe((value) => this.valueChanged.emit(value));
   }

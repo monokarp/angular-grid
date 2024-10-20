@@ -24,12 +24,14 @@ export class GridPaginationComponent {
   private readonly pageButtonSpread = 2;
 
   public getPaginationLabel() {
-    return `Currently showing ${
-      this.currentPage * this.pageSize + 1
-    } to ${Math.min(
-      (this.currentPage + 1) * this.pageSize,
-      this.totalRows
-    )} of ${this.totalRows} records`;
+    return this.totalRows
+      ? `Currently showing ${
+          this.currentPage * this.pageSize + 1
+        } to ${Math.min(
+          (this.currentPage + 1) * this.pageSize,
+          this.totalRows
+        )} of ${this.totalRows} records`
+      : 'No rows to show';
   }
 
   public pageButtonsRange(): number[] {

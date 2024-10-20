@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ColumnDefinition, RowData, RowType } from '../grid.types';
-import { HeaderCellComponent } from './cells/header-cell/header-cell.component';
+import { ColumnDefinition, RowType } from '../grid.types';
 import { DataCellComponent } from './cells/data-cell/data-cell.component';
+import { HeaderCellComponent } from './cells/header-cell/header-cell.component';
 
 @Component({
   selector: 'app-grid-body',
@@ -13,5 +13,5 @@ import { DataCellComponent } from './cells/data-cell/data-cell.component';
 })
 export class GridBodyComponent<T extends RowType> {
   @Input() public columnDefinitions!: ColumnDefinition<T>[];
-  @Input() public rowData!: RowData<T>;
+  @Input() public rowData!: T[];
 }

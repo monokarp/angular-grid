@@ -1,3 +1,14 @@
 <main class="main">
-  <app-grid [configuration]="gridConfiguration"/>
+  <div class="flex-col">
+    <app-search-bar
+      [delay]="searchInputDelayMs"
+      (valueChanged)="search$.next($event)"
+    />
+    <app-grid
+      [configuration]="gridConfiguration"
+      [data]="(rowData$ | async)!"
+      [totalRows]="(totalRows$ | async)!"
+      (pageSelected)="page$.next($event)"
+    />
+  </div>
 </main>

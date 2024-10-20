@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { testData } from './test-data';
 import { UserData } from './test-data.types';
 
-const copy = (obj: Object) => JSON.parse(JSON.stringify(obj));
+const copy = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
 
 @Injectable({
   providedIn: 'root',
@@ -10,18 +10,19 @@ const copy = (obj: Object) => JSON.parse(JSON.stringify(obj));
 export class TestDataService {
   private readonly mockDelayMs = 500;
 
-  constructor() {}
+  public getData(
+    search: string,
+    top: number,
+    skip: number
+  ): Promise<{ pageRows: UserData[]; totalRowCount: number }> {
+    const filteredRows = testData.filter((one) =>
+      one.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+    );
 
-  public all(): UserData[] {
-    return copy(testData);
-  }
-
-  public getRows(top: number, skip: number): Promise<UserData[]> {
-    return this.mockDelay(copy(testData.slice(skip, top)));
-  }
-
-  public countAll(): Promise<number> {
-    return this.mockDelay(testData.length);
+    return this.mockDelay({
+      pageRows: copy(filteredRows.slice(skip, skip+top)),
+      totalRowCount: filteredRows.length,
+    });
   }
 
   private mockDelay<T>(value: T): Promise<T> {
