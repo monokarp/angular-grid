@@ -1,9 +1,13 @@
+<app-grid-search
+  [delay]="configuration.search.inputDelayMs"
+  (valueChanged)="search$.next($event)"
+/>
 <app-grid-body
   [columnDefinitions]="configuration.columnDefinitions"
-  [rowData]="data"
+  [rowData]="(rowData$ | async)!"
 />
 <app-grid-pagination
   [pageSize]="configuration.pagination.pageSize"
-  [totalRows]="totalRows"
-  (pageSelected)="pageSelected.emit($event)"
+  [totalRows]="(totalRows$ | async)!"
+  (pageSelected)="page$.next($event)"
 />

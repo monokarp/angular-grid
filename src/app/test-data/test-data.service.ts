@@ -14,13 +14,13 @@ export class TestDataService {
     search: string,
     top: number,
     skip: number
-  ): Promise<{ pageRows: UserData[]; totalRowCount: number }> {
+  ): Promise<{ rows: UserData[]; totalRowCount: number }> {
     const filteredRows = testData.filter((one) =>
       one.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     );
 
     return this.mockDelay({
-      pageRows: copy(filteredRows.slice(skip, skip+top)),
+      rows: copy(filteredRows.slice(skip, skip+top)),
       totalRowCount: filteredRows.length,
     });
   }

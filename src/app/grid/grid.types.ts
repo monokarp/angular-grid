@@ -28,5 +28,16 @@ export interface RowType {
 
 export interface GridConfiguration<T extends RowType> {
   pagination: PaginationConfig;
+  search: {
+    inputDelayMs: number;
+    prop: keyof T;
+  };
   columnDefinitions: ColumnDefinition<T>[];
+  dataProvider: {
+    getData: (
+      searchValue: string,
+      top: number,
+      skip: number
+    ) => Promise<{ rows: T[]; totalRowCount: number }>;
+  };
 }

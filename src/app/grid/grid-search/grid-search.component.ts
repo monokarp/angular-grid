@@ -8,16 +8,16 @@ import {
   ViewChild,
 } from '@angular/core';
 import { debounceTime, fromEvent, map } from 'rxjs';
-import { BaseComponent } from '../base.component';
+import { BaseComponent } from '../../base.component';
 
 @Component({
-  selector: 'app-search-bar',
+  selector: 'app-grid-search',
   standalone: true,
   imports: [],
-  templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss',
+  templateUrl: './grid-search.component.html',
+  styleUrl: './grid-search.component.scss',
 })
-export class SearchBarComponent extends BaseComponent implements AfterViewInit {
+export class GridSearchComponent extends BaseComponent implements AfterViewInit {
   @Input() public delay!: number;
 
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef;
