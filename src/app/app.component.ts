@@ -4,6 +4,7 @@ import { GridComponent } from './grid/grid.component';
 import { GridConfiguration } from './grid/grid.types';
 import { TestDataService } from './test-data/test-data.service';
 import { UserData } from './test-data/test-data.types';
+import { DeleteButtonComponent } from './delete-button/delete-button.component';
 
 @Component({
   selector: 'app-root',
@@ -50,6 +51,7 @@ export class AppComponent {
         {
           action: 'delete',
           label: '',
+          component: DeleteButtonComponent,
           handler: (row) => this.dataService.delete(row.id),
           refreshData: true,
         },

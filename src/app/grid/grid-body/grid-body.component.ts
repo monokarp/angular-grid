@@ -13,7 +13,7 @@ import {
   isDataCol,
   RowType,
 } from '../grid.types';
-import { GridCellComponent } from './cells/data-cell/grid-cell.component';
+import { GridCellComponent } from './cells/grid-cell/grid-cell.component';
 import { HeaderCellComponent } from './cells/header-cell/header-cell.component';
 import { ColumnDefinitionError } from '../grid.errors';
 

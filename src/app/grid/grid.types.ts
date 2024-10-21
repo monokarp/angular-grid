@@ -1,3 +1,5 @@
+import { Type } from "@angular/core";
+
 interface PaginationConfig {
   pageSize: number;
 }
@@ -45,6 +47,7 @@ export function isDateCol<T>(value: any): value is DateCol<T> {
 export interface ActionCol<T> {
   action: string;
   label: string;
+  component: Type<any>;
   handler: (row: T) => Promise<void>;
   refreshData?: boolean;
 }

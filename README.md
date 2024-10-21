@@ -6,6 +6,7 @@ npm start
 
 ## Assumptions and considerations:
 ### Misc:
+- All data fetching is delayed by half a second, hardcoded in `src/app/test-data/test-data.service.ts`
 - I'm hardcoding all strings, considering i18n was never mentioned in the task spec, otherwise I'd use the angular i18n tool or write simple string lookup myself.
 - I'll take a shortcut and inline most SVGs as background images, since centralized styling was not mentioned as a requirement. A proper way would be to add svg components to enable interaction and styling.
 - The spec says `Table rows and columns should adapt to the input data provided in the
@@ -20,3 +21,5 @@ mock response.` but I will assume that column definitions are declared before th
 ### Pagination:
 - Current design is unclear to me - how is the '...' page button expected to behave? Does it expand inline or display a dropdown with more page buttons, or does the range shift? Since I'm unable to ask questions, I'll change it to the following: (first) (previous) (5 nearest page number buttons) (next) (last). I'll also use material font SVGs for the new buttons.
 - Explicit navigation to a page would be nice to have but not specified.
+### Action column
+- There are many ways to approach this, varying in flexibility. All else being equal, I feel like requiring the client to pass a custom component and action handler is a nice middle ground.

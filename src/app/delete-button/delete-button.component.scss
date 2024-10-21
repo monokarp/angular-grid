@@ -1,0 +1,12 @@
+.fab {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: url('../icons/trash.svg') no-repeat center;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(233, 228, 228);
+    }
+}
