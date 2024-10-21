@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataCellComponent } from './data-cell.component';
+import { GridCellComponent } from './grid-cell.component';
 
 describe('DataCellComponent', () => {
-  let component: DataCellComponent;
-  let fixture: ComponentFixture<DataCellComponent>;
+  let component: GridCellComponent;
+  let fixture: ComponentFixture<GridCellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DataCellComponent]
+      imports: [GridCellComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DataCellComponent);
+    fixture = TestBed.createComponent(GridCellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

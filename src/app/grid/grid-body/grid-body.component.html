@@ -1,21 +1,21 @@
-<div class="flex-row grid-wrapper">
-  @for (col of columnDefinitions; track col.prop; let idx = $index) {
-  <div class="flex-col col-wrapper">
-    <app-header-cell
-      class="header-cell"
-      [class.top-left]="idx == 0"
-      [class.top-right]="idx == columnDefinitions.length - 1"
-      [data]="col"
-    />
-    @for (row of rowData; track row.id; let idx = $index) {
-      <app-data-cell
-        class="data-cell"
-        [class.top-left]="idx == 0"
-        [class.top-right]="idx == columnDefinitions.length - 1"
-        [definition]="col"
-        [value]="row[col.prop]"
+<div class="grid-wrapper" [style.grid-template-columns]="gridTemplateColsCss()">
+  <div class="row">
+    @for (col of columnDefinitions; track trackCol(col); let idx = $index) {
+      <app-header-cell
+        class="header-cell"
+        [data]="col"
       />
     }
   </div>
+  @for (row of rowData; track row.id; let idx = $index) {
+    <div class="row">
+      @for (col of columnDefinitions; track trackCol(col); let idx = $index) {
+        <app-grid-cell
+          class="row-cell"
+          [definition]="col"
+          [row]="row"
+        />
+      }
+    </div>
   }
 </div>

@@ -2,15 +2,18 @@
   [delay]="configuration.search.inputDelayMs"
   (valueChanged)="searchChange$.next($event)"
 />
-<app-loading-overlay [enabled]="(fetchingData$ | async)!">
-  <app-grid-body
-    [columnDefinitions]="configuration.columnDefinitions"
-    [rowData]="(paginatedData$ | async)?.rows ?? []"
-/></app-loading-overlay>
-<app-grid-pagination
-  [pageSize]="pageSize"
-  [currentPage]="(currentPage$ | async)!"
-  [totalRows]="(paginatedData$ | async)?.totalRowCount ?? 0"
-  [disableActions]="(fetchingData$ | async)!"
-  (pageSelected)="pageChange$.next($event)"
-/>
+@if(rowData$ | async; as rowData){
+  <app-loading-overlay [enabled]="(fetchingData$ | async)!">
+    <app-grid-body
+      [columnDefinitions]="configuration.columnDefinitions"
+      [rowData]="rowData.rows"
+    />
+  </app-loading-overlay>
+  <app-grid-pagination
+    [pageSize]="pageSize"
+    [currentPage]="(currentPage$ | async)!"
+    [totalRows]="rowData.totalRowCount"
+    [disableActions]="(fetchingData$ | async)!"
+    (pageSelected)="pageChange$.next($event)"
+  />
+}

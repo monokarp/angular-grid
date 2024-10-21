@@ -10,19 +10,28 @@ const copy = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
 export class TestDataService {
   private readonly mockDelayMs = 500;
 
+  private testData = testData;
+
   public getData(
     search: string,
     top: number,
     skip: number
   ): Promise<{ rows: UserData[]; totalRowCount: number }> {
-    const filteredRows = testData.filter((one) =>
+    const filteredRows = this.testData.filter((one) =>
       one.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     );
 
     return this.mockDelay({
-      rows: copy(filteredRows.slice(skip, skip+top)),
+      rows: copy(filteredRows.slice(skip, skip + top)),
       totalRowCount: filteredRows.length,
     });
+  }
+
+  public async delete(rowId: string): Promise<void> {
+    debugger;
+    this.testData = this.testData.filter((one) => one.id !== rowId);
+
+    await this.mockDelay(null);
   }
 
   private mockDelay<T>(value: T): Promise<T> {

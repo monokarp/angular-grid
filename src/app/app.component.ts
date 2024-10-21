@@ -23,7 +23,6 @@ export class AppComponent {
       },
       search: {
         inputDelayMs: 300,
-        prop: 'name',
       },
       columnDefinitions: [
         { prop: 'id', label: 'ID' },
@@ -47,6 +46,12 @@ export class AppComponent {
             dateStyle: 'short',
             timeStyle: 'short',
           },
+        },
+        {
+          action: 'delete',
+          label: '',
+          handler: (row) => this.dataService.delete(row.id),
+          refreshData: true,
         },
       ],
       dataProvider: {
