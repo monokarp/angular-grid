@@ -1,22 +1,21 @@
-<div class="flex-row wrapper">
+<div class="flex-col wrapper">
   <div class="label">{{ getPaginationLabel() }}</div>
 
-  <app-loading-overlay
-    [enabled]="disableActions"
-    [showAnimation]="false"
-  >
-    <div class="flex-row">
+  <app-loading-overlay [enabled]="disableActions" [showAnimation]="false">
+    <div class="flex-row centered">
       <button class="range-btn first" (click)="first()"></button>
       <button class="range-btn previous" (click)="previous()">Previous</button>
-      @for(value of pageButtonsRange(); track value) {
-        <button
-          class="range-btn"
-          [class.selected]="currentPage == value"
-          (click)="setPage(value)"
-        >
-        {{ value + 1 }}
-      </button>
-      }
+      <div class="flex-row range-buttons-wrapper">
+        @for(value of pageButtonsRange(); track value) {
+          <button
+            class="range-btn"
+            [class.selected]="currentPage == value"
+            (click)="setPage(value)"
+          >
+            {{ value + 1 }}
+          </button>
+        }
+      </div>
       <button class="range-btn next" (click)="next()">Next</button>
       <button class="range-btn last" (click)="last()"></button></div
   ></app-loading-overlay>

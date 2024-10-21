@@ -1,21 +1,23 @@
-<div class="grid-wrapper" [style.grid-template-columns]="gridTemplateColsCss()">
-  <div class="row">
-    @for (col of columnDefinitions; track trackCol(col); let idx = $index) {
-      <app-header-cell
-        class="header-cell"
-        [data]="col"
-      />
-    }
-  </div>
-  @for (row of rowData; track row.id; let idx = $index) {
+<div class="scroll-wrapper">
+  <div class="grid-wrapper" [style.grid-template-columns]="gridTemplateColsCss()">
     <div class="row">
       @for (col of columnDefinitions; track trackCol(col); let idx = $index) {
-        <app-grid-cell
-          class="row-cell"
-          [definition]="col"
-          [row]="row"
+        <app-header-cell
+          class="header-cell"
+          [data]="col"
         />
       }
     </div>
-  }
+    @for (row of rowData; track row.id; let idx = $index) {
+      <div class="row">
+        @for (col of columnDefinitions; track trackCol(col); let idx = $index) {
+          <app-grid-cell
+            class="row-cell"
+            [definition]="col"
+            [row]="row"
+          />
+        }
+      </div>
+    }
+  </div>
 </div>

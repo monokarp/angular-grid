@@ -2,6 +2,7 @@
     border: 0.075rem solid #EAECF0;
     border-radius: 0.25rem;
     display: grid;
+    width: max-content;
 }
 
 .row {
@@ -23,4 +24,9 @@
 .header-cell {
     padding: 0.5rem;
     background-color: #F2F4F7;
+}
+
+.scroll-wrapper {
+    width: 100%;
+    overflow: scroll;
 }
