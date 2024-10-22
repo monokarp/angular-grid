@@ -7,6 +7,10 @@
 
 .row {
     display: contents;
+
+    &:nth-child(even) {
+        background-color: #FCFCFD;
+    }
 }
 
 .row-cell {
@@ -16,9 +20,7 @@
     border: solid #EAECF0;
     border-width: 0.075rem 0 0 0;
 
-    &:nth-child(even) {
-        background-color: #FCFCFD;
-    }
+    background-color: inherit;
 }
 
 .header-cell {
