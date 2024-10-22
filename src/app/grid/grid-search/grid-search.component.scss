@@ -1,8 +1,11 @@
+@import '../grid.variables';
+@import '../grid.mixins';
+
 .input-element {
-    border: solid #D0D5DD 0.075rem;
-    border-radius: 0.125rem;
-    padding: 0.5rem;
-    padding-left: 1.75rem;
+    border: solid $color-border-light $bw-m;
+    border-radius: $br-xs;
+    padding: $p-s;
+    padding-left: $p-background-svg;
     background: url('../../icons/search.svg') no-repeat 0.25rem center;
 }
 
@@ -10,7 +13,7 @@
     margin-bottom: 1rem;
     justify-content: center;
 
-    @media (min-width: 768px) {
+    @include widescreen {
         justify-content: flex-start;
     }
 }

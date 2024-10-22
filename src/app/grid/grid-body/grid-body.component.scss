@@ -1,6 +1,8 @@
+@import '../grid.variables';
+
 .grid-wrapper {
-    border: 0.075rem solid #EAECF0;
-    border-radius: 0.25rem;
+    border: $bw-m solid $color-border-light;
+    border-radius: $br-s;
     display: grid;
     width: max-content;
 }
@@ -9,23 +11,23 @@
     display: contents;
 
     &:nth-child(even) {
-        background-color: #FCFCFD;
+        background-color: $color-bg-hl;
     }
 }
 
 .row-cell {
-    padding: 0.5rem;
+    padding: $p-s;
     align-content: center;
 
-    border: solid #EAECF0;
-    border-width: 0.075rem 0 0 0;
+    border: solid $color-border-light;
+    border-width: $bw-m 0 0 0;
 
     background-color: inherit;
 }
 
 .header-cell {
-    padding: 0.5rem;
-    background-color: #F2F4F7;
+    padding: $p-s;
+    background-color: $color-btn-hl;
 }
 
 .scroll-wrapper {

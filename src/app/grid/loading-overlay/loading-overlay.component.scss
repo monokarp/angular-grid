@@ -1,3 +1,5 @@
+@import '../grid.variables.scss';
+
 .wrapper {
     position: relative;
 }
@@ -19,7 +21,7 @@
             content: '';
             width: 2rem;
             height: 2rem;
-            border: 0.25rem solid rgba(0, 0, 0, 0.2);
+            border: $bw-overlay solid rgba(0, 0, 0, 0.2);
             border-top-color: #333;
             border-radius: 50%;
             animation: spin 1s linear infinite;

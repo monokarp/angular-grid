@@ -1,21 +1,24 @@
+@import '../grid.variables';
+@import '../grid.mixins';
+
 .wrapper {
     justify-content: space-between;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: $p-m;
+    padding-bottom: $p-m;
 
-    @media (min-width: 768px) {
+    @include widescreen {
         flex-direction: row;
     }
 }
 
 .label {
     align-content: center;
-    padding: 1rem;
+    padding: $p-m;
     text-align: center;
 
-    @media (min-width: 768px) {
+    @include widescreen {
         text-align: left;
-        padding: 0 2rem 0 0;
+        padding: 0 $p-l 0 0;
     }
 }
 
@@ -27,12 +30,7 @@
     max-width: 30%;
     overflow-x: scroll;
 
-    box-shadow: inset 10px 0 8px -8px rgba(0, 0, 0, 0.5),
-        /* Left inner shadow */
-        inset -10px 0 8px -8px rgba(0, 0, 0, 0.5);
-    /* Right inner shadow */
-
-    @media (min-width: 768px) {
+    @include widescreen {
         max-width: fit-content;
     }
 }
@@ -41,40 +39,39 @@
     min-width: 2rem;
     cursor: pointer;
 
-    background-color: white;
-    border-radius: 0rem;
-    border: solid #D0D5DD;
-    // TODO move colors and border sizes to global variables
-    border-width: 0.025rem 0.0125rem 0.025rem 0.0125rem;
-    padding: 0.5rem;
+    background-color: $color-btn-bg;
+    border-radius: 0;
+    border: solid $color-border;
+    border-width: $bw-s $bw-xs $bw-s $bw-xs;
+    padding: $p-s;
 
     &.first {
-        border-radius: 0.25rem 0 0 0.25rem;
+        border-radius: $br-s 0 0 $br-s;
 
         background: url('../../icons/first_page.svg') no-repeat center;
     }
 
     &.previous {
-        padding-left: 1.75rem;
+        padding-left: $p-background-svg;
         background: url('../../icons/arrow_back.svg') no-repeat 0.25rem center;
     }
 
     &.next {
-        padding-right: 1.75rem;
+        padding-right: $p-background-svg;
         background: url('../../icons/arrow_forward.svg') no-repeat right 0.25rem center;
     }
 
     &.last {
-        border-radius: 0 0.25rem 0.25rem 0;
+        border-radius: 0 $br-s $br-s 0;
 
         background: url('../../icons/last_page.svg') no-repeat center;
     }
 
     &:hover {
-        background-color: #F2F4F7;
+        background-color: $color-btn-hl;
     }
 
     &.selected {
-        background-color: lightgrey;
+        background-color: $color-btn-selected;
     }
 }
